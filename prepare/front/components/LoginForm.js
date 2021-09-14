@@ -2,9 +2,9 @@ import React, { useCallback } from "react";
 import { Form, Input, Button } from "antd";
 import Link from "next/link";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 import useInput from "../hooks/useInput";
-import { useDispatch } from "react-redux";
-import { loginAction } from "../reducers/user";
+import { logInRequestAction } from "../reducers/user";
 
 const ButtonWrapper = styled.div`
   margin-top: 10px;
@@ -15,21 +15,29 @@ const FormWrapper = styled(Form)`
 `;
 
 const LoginForm = () => {
+  const logInLoading = useSelector((state) => state.user.logInLoading);
   const dispatch = useDispatch();
-  const [id, onChangeId] = useInput("");
+  const [email, onChangeEmail] = useInput("");
   const [password, onChangePassword] = useInput("");
 
   const onSubmitForm = useCallback(() => {
-    dispatch(loginAction({ id, password }));
-  }, [id, password]);
+    dispatch(logInRequestAction({ email, password }));
+  }, [email, password]);
 
   return (
     <FormWrapper onFinish={onSubmitForm}>
       <div>
-        <label htmlFor="user-id">아이디</label>
+        <label htmlFor="user-email" type="email">
+          이메일
+        </label>
       </div>
       <div>
-        <Input name="user-id" value={id} onChange={onChangeId} required />
+        <Input
+          name="user-email"
+          value={email}
+          onChange={onChangeEmail}
+          required
+        />
       </div>
       <div>
         <label htmlFor="user-password">비밀번호</label>
@@ -44,7 +52,7 @@ const LoginForm = () => {
         />
       </div>
       <ButtonWrapper>
-        <Button type="primary" htmlType="submit" loading={false}>
+        <Button type="primary" htmlType="submit" loading={logInLoading}>
           로그인
         </Button>
         <Link href="/signup">

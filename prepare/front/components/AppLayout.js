@@ -2,10 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
 import { Input, Menu, Row, Col } from "antd";
+import { useSelector } from "react-redux";
+import styled, { createGlobalStyle } from "styled-components";
 import LoginForm from "./LoginForm";
 import UserProfile from "./UserProfile";
-import styled, { createGlobalStyle } from "styled-components";
-import { useSelector } from "react-redux";
 
 const Global = createGlobalStyle`
 .ant-row {
@@ -26,7 +26,7 @@ const SearchInput = styled(Input.Search)`
   vertical-align: middle;
 `;
 const AppLayout = ({ children }) => {
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const me = useSelector((state) => state.user.me);
 
   return (
     <div>
@@ -53,7 +53,7 @@ const AppLayout = ({ children }) => {
       </Menu>
       <Row gutter={8}>
         <Col xs={24} md={6}>
-          {isLoggedIn ? <UserProfile /> : <LoginForm />}
+          {me ? <UserProfile /> : <LoginForm />}
         </Col>
         <Col xs={24} md={12}>
           {children}
