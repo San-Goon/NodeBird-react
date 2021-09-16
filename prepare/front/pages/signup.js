@@ -17,6 +17,13 @@ const Signup = () => {
   const signUpLoading = useSelector((state) => state.user.signUpLoading);
   const signUpDone = useSelector((state) => state.user.signUpDone);
   const signUpError = useSelector((state) => state.user.signUpError);
+  const me = useSelector((state) => state.user.me);
+
+  useEffect(() => {
+    if (me && me.id) {
+      Router.replace("/");
+    }
+  }, [me && me.id]);
 
   useEffect(() => {
     if (signUpDone) {
