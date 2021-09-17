@@ -1,13 +1,11 @@
 import React, { useCallback } from "react";
 import { Card, Avatar, Button } from "antd";
-import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutRequestAction } from "../reducers/user";
 
 const UserProfile = () => {
   const dispatch = useDispatch();
-  const logOutLoading = useSelector((state) => state.user.logOutLoading);
-  const me = useSelector((state) => state.user.me);
+  const { me, logOutLoading } = useSelector((state) => state.user);
 
   const onLogOut = useCallback(() => {
     dispatch(logOutRequestAction());
@@ -20,12 +18,12 @@ const UserProfile = () => {
           <br />
           {me.Posts.length}
         </div>,
-        <div key="following">
+        <div key="followings">
           팔로잉
           <br />
           {me.Followings.length}
         </div>,
-        <div key="following">
+        <div key="followings">
           팔로워
           <br />
           {me.Followers.length}
@@ -41,10 +39,6 @@ const UserProfile = () => {
       </Button>
     </Card>
   );
-};
-
-UserProfile.propTypes = {
-  logOutLoading: PropTypes.func.isRequired,
 };
 
 export default UserProfile;

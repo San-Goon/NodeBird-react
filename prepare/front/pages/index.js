@@ -9,9 +9,9 @@ import { LOAD_MY_INFO_REQUEST } from "../reducers/user";
 const Home = () => {
   const dispatch = useDispatch();
   const me = useSelector((state) => state.user.me);
-  const mainPosts = useSelector((state) => state.post.mainPosts);
-  const hasMorePosts = useSelector((state) => state.post.hasMorePosts);
-  const loadPostsLoading = useSelector((state) => state.post.loadPostsLoading);
+  const { mainPosts, hasMorePosts, loadPostsLoading } = useSelector(
+    (state) => state.post
+  );
 
   useEffect(() => {
     dispatch({
@@ -24,11 +24,11 @@ const Home = () => {
 
   useEffect(() => {
     function onScroll() {
-      console.log(
-        window.scrollY,
-        document.documentElement.clientHeight,
-        document.documentElement.scrollHeight
-      );
+      // console.log(
+      //   window.scrollY,
+      //   document.documentElement.clientHeight,
+      //   document.documentElement.scrollHeight
+      // );
       if (
         window.scrollY + document.documentElement.clientHeight >
         document.documentElement.scrollHeight - 300
@@ -44,7 +44,7 @@ const Home = () => {
     return () => {
       window.removeEventListener("scroll", onScroll);
     };
-  }, [hasMorePosts, loadPostsLoading]);
+  }, [hasMorePosts, loadPostsLoading, mainPosts]);
 
   return (
     <AppLayout>

@@ -15,8 +15,7 @@ const FormWrapper = styled(Form)`
 `;
 
 const LoginForm = () => {
-  const logInLoading = useSelector((state) => state.user.logInLoading);
-  const logInError = useSelector((state) => state.user.logInError);
+  const { logInLoading, logInError } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [email, onChangeEmail] = useInput("");
   const [password, onChangePassword] = useInput("");
@@ -34,13 +33,11 @@ const LoginForm = () => {
   return (
     <FormWrapper onFinish={onSubmitForm}>
       <div>
-        <label htmlFor="user-email" type="email">
-          이메일
-        </label>
-      </div>
-      <div>
+        <label htmlFor="user-email">이메일</label>
+        <br />
         <Input
           name="user-email"
+          type="email"
           value={email}
           onChange={onChangeEmail}
           required
@@ -48,8 +45,7 @@ const LoginForm = () => {
       </div>
       <div>
         <label htmlFor="user-password">비밀번호</label>
-      </div>
-      <div>
+        <br />
         <Input
           name="user-password"
           type="password"
