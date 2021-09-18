@@ -3,6 +3,7 @@ const express = require("express");
 const postRouter = require("./routes/post");
 const postsRouter = require("./routes/posts");
 const userRouter = require("./routes/user");
+const hashtagRouter = require("./routes/hashtag");
 const db = require("./models");
 const passportConfig = require("./passport");
 const session = require("express-session");
@@ -10,6 +11,7 @@ const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const app = express();
 const dotenv = require("dotenv");
+const path = require("path");
 const morgan = require("morgan");
 
 dotenv.config();
@@ -22,6 +24,7 @@ db.sequelize
   .catch(console.error);
 passportConfig();
 
+app.use("/", express.static(path.join(__dirname, "uploads")));
 app.use(morgan("dev"));
 app.use(
   cors({
@@ -49,6 +52,7 @@ app.get("/", (req, res) => {
 app.use("/posts", postsRouter);
 app.use("/post", postRouter);
 app.use("/user", userRouter);
+app.use("/hashtag", hashtagRouter);
 
 app.listen(3005, () => {
   console.log("서버 실행 중");

@@ -4,6 +4,9 @@ export const initialState = {
   loadMyInfoLoading: false,
   loadMyInfoDone: false,
   loadMyInfoError: null,
+  loadUserLoading: false,
+  loadUserDone: false,
+  loadUserError: null,
   followLoading: false,
   followDone: false,
   followError: null,
@@ -32,9 +35,14 @@ export const initialState = {
   removeFollowerDone: false,
   removeFollowerError: null,
   me: null,
+  userInfo: null,
   signUpData: {},
   loginData: {},
 };
+
+export const LOAD_USER_REQUEST = "LOAD_USER_REQUEST";
+export const LOAD_USER_SUCCESS = "LOAD_USER_SUCCESS";
+export const LOAD_USER_FAILURE = "LOAD_USER_FAILURE";
 
 export const LOAD_MY_INFO_REQUEST = "LOAD_MY_INFO_REQUEST";
 export const LOAD_MY_INFO_SUCCESS = "LOAD_MY_INFO_SUCCESS";
@@ -150,6 +158,20 @@ const reducer = (state = initialState, action) => {
         draft.me = action.data;
         break;
       case LOAD_MY_INFO_FAILURE:
+        draft.loadMyInfoLoading = false;
+        draft.loadMyInfoError = action.error;
+        break;
+      case LOAD_USER_REQUEST:
+        draft.loadMyInfoLoading = true;
+        draft.loadMyInfoError = null;
+        draft.loadMyInfoDone = false;
+        break;
+      case LOAD_USER_SUCCESS:
+        draft.loadMyInfoLoading = false;
+        draft.loadMyInfoDone = true;
+        draft.userInfo = action.data;
+        break;
+      case LOAD_USER_FAILURE:
         draft.loadMyInfoLoading = false;
         draft.loadMyInfoError = action.error;
         break;
