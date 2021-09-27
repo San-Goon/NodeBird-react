@@ -8,7 +8,7 @@ import AppLayout from "../components/AppLayout";
 import wrapper from "../store/configureStore";
 import { LOAD_USER_REQUEST } from "../reducers/user";
 
-const About = () => {
+const Profile = () => {
   const { userInfo } = useSelector((state) => state.user);
 
   return (
@@ -56,4 +56,4 @@ export const getStaticProps = wrapper.getStaticProps(async (context) => {
   await context.store.sagaTask.toPromise();
 });
 
-export default About;
+export default Profile;
