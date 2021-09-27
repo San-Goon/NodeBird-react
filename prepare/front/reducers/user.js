@@ -162,18 +162,18 @@ const reducer = (state = initialState, action) => {
         draft.loadMyInfoError = action.error;
         break;
       case LOAD_USER_REQUEST:
-        draft.loadMyInfoLoading = true;
-        draft.loadMyInfoError = null;
-        draft.loadMyInfoDone = false;
+        draft.loadUserLoading = true;
+        draft.loadUserError = null;
+        draft.loadUserDone = false;
         break;
       case LOAD_USER_SUCCESS:
-        draft.loadMyInfoLoading = false;
-        draft.loadMyInfoDone = true;
+        draft.loadUserLoading = false;
+        draft.loadUserDone = true;
         draft.userInfo = action.data;
         break;
       case LOAD_USER_FAILURE:
-        draft.loadMyInfoLoading = false;
-        draft.loadMyInfoError = action.error;
+        draft.loadUserLoading = false;
+        draft.loadUserError = action.error;
         break;
       case FOLLOW_REQUEST:
         draft.followLoading = true;
