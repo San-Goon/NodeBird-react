@@ -13,6 +13,8 @@ const app = express();
 const dotenv = require("dotenv");
 const path = require("path");
 const morgan = require("morgan");
+const hpp = require("hpp");
+const helmet = require("helmet");
 
 dotenv.config();
 
@@ -24,11 +26,18 @@ db.sequelize
   .catch(console.error);
 passportConfig();
 
+if (process.env.NODE_ENV === "production") {
+  app.use(morgan("combined"));
+  app.use(hpp());
+  app.use(helmet());
+} else {
+  app.use(morgan("dev"));
+}
 app.use("/", express.static(path.join(__dirname, "uploads")));
 app.use(morgan("dev"));
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000", "nodebird.com"],
     credentials: true,
   })
 );
