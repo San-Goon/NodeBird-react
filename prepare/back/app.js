@@ -37,7 +37,7 @@ app.use("/", express.static(path.join(__dirname, "uploads")));
 app.use(morgan("dev"));
 app.use(
   cors({
-    origin: ["http://localhost:3000", "nodebird.com"],
+    origin: ["http://localhost:3000", "nodebird.com", "http://52.79.177.153"],
     credentials: true,
   })
 );
