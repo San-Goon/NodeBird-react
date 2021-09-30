@@ -9,7 +9,6 @@ const passportConfig = require("./passport");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
-const app = express();
 const dotenv = require("dotenv");
 const path = require("path");
 const morgan = require("morgan");
@@ -17,7 +16,7 @@ const hpp = require("hpp");
 const helmet = require("helmet");
 
 dotenv.config();
-
+const app = express();
 db.sequelize
   .sync()
   .then(() => {
@@ -33,16 +32,19 @@ if (process.env.NODE_ENV === "production") {
 } else {
   app.use(morgan("dev"));
 }
-app.use("/", express.static(path.join(__dirname, "uploads")));
-app.use(morgan("dev"));
+
 app.use(
   cors({
     origin: ["http://localhost:3000", "nodebird.com", "http://52.79.177.153"],
     credentials: true,
   })
 );
+app.use("/", express.static(path.join(__dirname, "uploads")));
+app.use(morgan("dev"));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   session({
     saveUninitialized: false,
@@ -52,7 +54,6 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(cookieParser(process.env.COOKIE_SECRET));
 
 app.get("/", (req, res) => {
   res.send("hello express");
