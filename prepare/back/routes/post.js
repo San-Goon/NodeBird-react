@@ -6,6 +6,7 @@ const path = require("path");
 const fs = require("fs");
 const router = express.Router();
 const AWS = require("aws-sdk");
+const multerS3 = require("multer-s3");
 
 try {
   fs.accessSync("uploads");
