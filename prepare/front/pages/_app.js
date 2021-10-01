@@ -9,7 +9,7 @@ const NodeBird = ({ Component }) => {
     <>
       <Head>
         <meta charset="utf-8" />
-        <title>NodeBird</title>
+        <title>비밀공간</title>
       </Head>
       <Component />
     </>
