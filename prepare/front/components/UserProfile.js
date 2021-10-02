@@ -14,7 +14,6 @@ const UserProfile = () => {
     <Card
       actions={[
         <div key="twit">
-          {" "}
           <Link href={`/user/${me.id}`}>
             <a>
               짹짹
@@ -24,7 +23,6 @@ const UserProfile = () => {
           </Link>
         </div>,
         <div key="followings">
-          {" "}
           <Link href="/profile">
             <a>
               팔로잉
@@ -34,14 +32,13 @@ const UserProfile = () => {
           </Link>
         </div>,
         <div key="followings">
-          {" "}
           <Link href="/profile">
             <a>
               팔로워
               <br />
+              {me.Followers.length}
             </a>
           </Link>
-          {me.Followers.length}
         </div>,
       ]}
     >

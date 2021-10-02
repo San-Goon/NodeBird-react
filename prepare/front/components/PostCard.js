@@ -25,7 +25,7 @@ import moment from "moment";
 moment.locale("ko");
 
 const PostCard = ({ post }) => {
-  const [commentFormOpened, setComentFormOpened] = useState("false");
+  const [commentFormOpened, setCommentFormOpened] = useState("false");
   const { removePostLoading } = useSelector((state) => state.post);
   const dispatch = useDispatch();
   const id = useSelector((state) => state.user.me?.id);
@@ -60,7 +60,7 @@ const PostCard = ({ post }) => {
     });
   }, [id]);
   const onToggleComment = useCallback(() => {
-    setComentFormOpened((prev) => !prev);
+    setCommentFormOpened((prev) => !prev);
   }, []);
   const onRemovePost = useCallback(() => {
     dispatch({
@@ -120,7 +120,7 @@ const PostCard = ({ post }) => {
           <Card
             cover={
               post.Retweet.Images[0] && (
-                <PostImages images={PostCard.Retweet.Images} />
+                <PostImages images={post.Retweet.Images} />
               )
             }
           >

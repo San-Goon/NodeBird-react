@@ -52,12 +52,15 @@ const PostForm = () => {
     });
   }, []);
 
-  const onRemoveImage = useCallback((index) => () => {
-    dispatch({
-      type: REMOVE_IMAGE,
-      data: index,
-    });
-  });
+  const onRemoveImage = useCallback(
+    (index) => () => {
+      dispatch({
+        type: REMOVE_IMAGE,
+        data: index,
+      });
+    },
+    []
+  );
 
   return (
     <Form
@@ -85,18 +88,20 @@ const PostForm = () => {
           짹짹
         </Button>
       </div>
-      {imagePaths.map((v, i) => (
-        <div key={v} style={{ display: "inline-block" }}>
-          <img
-            src={v.replace(/\/thumb\//, "/original/")}
-            style={{ width: "200px" }}
-            alt={v}
-          />
-          <div>
-            <Button onClick={onRemoveImage(i)}>제거</Button>
+      <div>
+        {imagePaths.map((v, i) => (
+          <div key={v} style={{ display: "inline-block" }}>
+            <img
+              src={v.replace(/\/thumb\//, "/original/")}
+              style={{ width: "200px" }}
+              alt={v}
+            />
+            <div>
+              <Button onClick={onRemoveImage(i)}>제거</Button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </Form>
   );
 };

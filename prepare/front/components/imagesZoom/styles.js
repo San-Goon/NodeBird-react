@@ -11,11 +11,11 @@ export const Overlay = styled.div`
 `;
 
 export const Header = styled.header`
-  header: 44px;
-  backgroundL white;
+  height: 44px;
+  background: white;
   position: relative;
   padding: 0;
-  text-align:center;
+  text-align: center;
 
   & h1 {
     margin: 0;
@@ -23,7 +23,6 @@ export const Header = styled.header`
     color: #333;
     line-height: 44px;
   }
-
 `;
 
 export const SlickWrapper = styled.div`
